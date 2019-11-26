@@ -8,4 +8,10 @@ public class Program
 		char ch = str.charAt( str.length()-1 ); 
 		System.out.println(ch);
 	}
+	public static void main1(String[] args) 
+	{
+		String str = new String("SunBeam");
+		char ch = str.charAt( str.length()-1 ); 
+		System.out.println(ch);
+	}
 }
