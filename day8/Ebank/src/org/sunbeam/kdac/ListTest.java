@@ -1,12 +1,14 @@
 package org.sunbeam.kdac;
 
-//import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ListTest 
 {
-	private List<Account> accList;
-	public void setaccList(List<Account> accList) 
+	Scanner sc = new Scanner(System.in);
+	private ArrayList<Account> accList;
+	public void setaccList(ArrayList<Account> accList) 
 	{
 		this.accList = accList;
 	}
@@ -14,23 +16,11 @@ public class ListTest
 	{
 		if( this.accList != null && temp != null )
 		{
-//			for (Account emp : Accounts) 
 				this.accList.add(temp);
 		}
 	}
-	/*public Account findRecord(int empid )
-	{
-		if( this.accList != null )
-		{
-			for (Account emp : accList) 
-			{
-				if( emp.getEmpid() == empid )
-					return emp;
-			}
-		}
-		return null;
-	}*/
-	public Account findRecord(int accno )
+	
+	public Account findRecord(int accno ) throws AccountNotFoundException
 	{
 		if( this.accList != null )
 		{
@@ -41,24 +31,14 @@ public class ListTest
 				int index = this.accList.indexOf(key);
 				return this.accList.get(index);
 			}
+			else
+			{
+				throw new AccountNotFoundException("Account Not Found");
+			}
 		}
 		return null;
 	}
-	/*public boolean removeRecord(int empid )
-	{
-		if( this.accList != null )
-		{
-			Account key = new Account();
-			key.setEmpid( empid );
-			if( this.accList.contains(key))
-			{
-				int index = this.accList.indexOf(key);
-				this.accList.remove(index);
-				return true;
-			}
-		}
-		return false;
-	}*/
+	
 	public boolean removeRecord(int accno )
 	{
 		if( this.accList != null )
@@ -82,5 +62,16 @@ public class ListTest
 			this.accList.forEach(System.out::println);
 			
 		}
+	}
+	public void withdrawAcc(int[] accno,int i) throws InsufficientBalanceException{
+//		Account withDrawAcc = this.accList.
+//		this.accList.
+		System.out.println("Current balance is  "+withDrawAcc.getBalance());
+		float withDrawAmount = sc.nextFloat();
+		if(withDrawAmount > withDrawAcc.getBalance())
+		{
+			throw new InsufficientBalanceException("Insufficient Balance in Accout");
+		}
+		
 	}
 }

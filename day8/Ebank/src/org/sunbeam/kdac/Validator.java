@@ -7,7 +7,7 @@ public class Validator
 	{
 		return name.matches(NAME_PATTEREN);
 	}
-	public static final String  NAME_PATTEREN = "[a-zA-Z][a-zA-Z ]*";
+	public static final String  NAME_PATTEREN = "[a-zA-Z][a-zA-Z ]{5,15}$";
 	public static boolean validateEmail(String email )
 	{
 		return email.matches(EMAIL_PATTERN);

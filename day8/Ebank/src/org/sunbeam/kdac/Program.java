@@ -42,10 +42,7 @@ public class Program
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		arr[ 1 ] = new Account("Amol",20,80000.50f);
-//		arr[ 2 ] = new Account("Prashant",10,75000.50f);
-//		arr[ 3 ] = new Account("Rahul",40,70000.50f);
-//		arr[ 4 ] = new Account("Sarang",30,65000.50f);
+
 		return arr;
 	}
 	private static void acceptRecord(int[] accno) 
@@ -70,20 +67,7 @@ public class Program
 		else
 			System.out.println("Record not found");
 	}
-//	private static void printRecord(Account[] arr) 
-//	{
-//		if( arr != null )
-//		{
-//			try {
-//				for (Account acc : arr) 
-//					System.out.println(acc.toString());
-//				System.out.println();
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//	}
+
 	private static int menuList( )
 	{
 		System.out.println("0. Exit");
@@ -91,18 +75,12 @@ public class Program
 		System.out.println("2. Find Record");
 		System.out.println("3. Remove Record");
 		System.out.println("4. Print Record(s)[ Sorted ]");
+		System.out.println("5. Withdraw");
+		
 		System.out.print("Enter choice	:	");
 		return sc.nextInt();
 	}
-//	private static int subMenuList( )
-//	{
-//		System.out.println("0. Exit");
-//		System.out.println("1. Sort By Name");
-//		System.out.println("2. Sort By Accono");
-//		
-//		System.out.print("Enter choice	:	");
-//		return sc.nextInt();
-//	}
+
 	public static void main(String[] args) 
 	{
 		int choice;
@@ -115,41 +93,40 @@ public class Program
 		test.setaccList(new LinkedList<Account>());
 		while( ( choice = Program.menuList( ) ) != 0 )
 		{
-			switch( choice )
-			{
-			case 1:
-				temp = Program.getAccounts();
-				test.addRecord( temp );
-				break;
-			case 2:
-				Program.acceptRecord( accno );
-				Account value = test.findRecord( accno[ 0 ] );
-				Program.printRecord(value);
-				break;
-			case 3:
-				Program.acceptRecord( accno );
-				boolean removedStatus = test.removeRecord( accno[ 0 ] );
-				Program.printRecord(removedStatus);
-				break;
-			case 4:
-				test.printRecord(Accounts);
-//				while( ( choice = Program.subMenuList( ) ) != 0 )
-//				{
-//					Comparator<Account> comparator = null;
-//					switch( choice )
-//					{
-//					case 1:
-//						comparator = new SortByName();
-//						break;
-//					case 2:
-//						comparator = new SortByAccountno();
-//						break;
-//					
-//					}
-//					test.printRecord( comparator );
-//				}
-				break;
+			try {
+				switch( choice )
+				{
+				case 1:
+					temp = Program.getAccounts();
+					test.addRecord( temp );
+					break;
+				case 2:
+					Program.acceptRecord( accno );
+					Account value = test.findRecord( accno[ 0 ] );
+					Program.printRecord(value);
+					break;
+				case 3:
+					Program.acceptRecord( accno );
+					boolean removedStatus = test.removeRecord( accno[ 0 ] );
+					Program.printRecord(removedStatus);
+					break;
+				case 4:
+					test.printRecord(Accounts);
+
+					break;
+					
+				case 5:
+					System.out.printf("Enter Account No : ");
+					int no= sc.nextInt();
+					test.withdrawAcc(accno,no);
+					break;
+					
+				}
+			} catch (InsufficientBalanceException | AccountNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
+	
 }
