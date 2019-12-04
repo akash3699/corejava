@@ -64,7 +64,7 @@ public class ListTest
 		}
 	}
 	public void withdrawAcc(int[] accno,int i) throws InsufficientBalanceException{
-//		Account withDrawAcc = this.accList.
+		Account withDrawAcc = this.accList.get();
 //		this.accList.
 		System.out.println("Current balance is  "+withDrawAcc.getBalance());
 		float withDrawAmount = sc.nextFloat();
