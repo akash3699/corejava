@@ -17,6 +17,9 @@ public class UserDao implements Closeable
 	private Connection connection;
 	private CallableStatement stmtInsert;
 	private CallableStatement stmtUpdate;
+	private CallableStatement stmtUpdateEmail;
+	private CallableStatement stmtUpdatePwd;
+	private CallableStatement stmtUpdatePhone;
 	private CallableStatement stmtDelete;
 	private CallableStatement stmtSelect;
 	
@@ -25,6 +28,9 @@ public class UserDao implements Closeable
 		this.connection = DBUtils.getConnection();
 		this.stmtInsert = this.connection.prepareCall("{call sp_insert_users(?,?,?,?,?,?)}");
 		this.stmtUpdate = this.connection.prepareCall("{call sp_update_users(?,?)}");
+		this.stmtUpdateEmail = this.connection.prepareCall("{call sp_update_users_email(?,?)}");
+		this.stmtUpdatePwd = this.connection.prepareCall("{call sp_update_users_passwd(?,?)}");
+		this.stmtUpdatePhone = this.connection.prepareCall("{call sp_update_users_phoneno(?,?)}");
 		this.stmtDelete = this.connection.prepareCall("{call sp_delete_users(?)}");
 		this.stmtSelect = this.connection.prepareCall("{call sp_select_users()}");
 	}
@@ -41,12 +47,26 @@ public class UserDao implements Closeable
 		this.stmtInsert.execute();
 		return this.stmtInsert.getUpdateCount();
 	}
-	public int updateUser( int userid, String user_Name )throws Exception
+	public int updateUserEmail( int userid, String user_Email )throws Exception
 	{
-		this.stmtUpdate.setInt(1, userid );
-		this.stmtUpdate.setString(2, user_Name);
-		this.stmtUpdate.execute();
-		return this.stmtUpdate.getUpdateCount();
+		this.stmtUpdateEmail.setInt(1, userid );
+		this.stmtUpdateEmail.setString(2, user_Email);
+		this.stmtUpdateEmail.execute();
+		return this.stmtUpdateEmail.getUpdateCount();
+	}
+	public int updateUserPwd( int userid, String user_Pwd )throws Exception
+	{
+		this.stmtUpdatePwd.setInt(1, userid );
+		this.stmtUpdatePwd.setString(2, user_Pwd);
+		this.stmtUpdatePwd.execute();
+		return this.stmtUpdatePwd.getUpdateCount();
+	}
+	public int updateUserPhone( int userid, String user_Pwd )throws Exception
+	{
+		this.stmtUpdatePhone.setInt(1, userid );
+		this.stmtUpdatePhone.setString(2, user_Pwd);
+		this.stmtUpdatePhone.execute();
+		return this.stmtUpdatePhone.getUpdateCount();
 	}
 	public int deleteUser( int userId )throws Exception
 	{

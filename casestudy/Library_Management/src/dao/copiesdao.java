@@ -15,6 +15,8 @@ public class copiesdao implements Closeable
 		private Connection connection;
 		private CallableStatement stmtInsert;
 		private CallableStatement stmtUpdate;
+		private CallableStatement stmtUpdateRack;
+		private CallableStatement stmtUpdateStatus;
 		private CallableStatement stmtDelete;
 		private CallableStatement stmtSelect;
 		public copiesdao() throws Exception 
@@ -27,10 +29,10 @@ public class copiesdao implements Closeable
 		}
 		public int insertcopies(copies copies) throws Exception
 		{
-			this.stmtInsert.setInt(1, copies.getCopiesid());
-			this.stmtInsert.setInt(2, copies.getBookid());
-			this.stmtInsert.setInt(3, copies.getRack());
-			this.stmtInsert.setString(4, copies.getStatus());
+			this.stmtInsert.setInt(3, copies.getCopiesid());
+			this.stmtInsert.setInt(1, copies.getRack());
+			this.stmtInsert.setString(2, copies.getStatus());
+			this.stmtInsert.setInt(4, copies.getBookid());
 
 
 

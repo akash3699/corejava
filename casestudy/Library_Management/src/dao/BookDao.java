@@ -19,14 +19,16 @@ public class BookDao implements Closeable
 	private CallableStatement stmtUpdate;
 	private CallableStatement stmtDelete;
 	private CallableStatement stmtSelect;
+	private CallableStatement stmtSelectByname;
 	
 	public BookDao() throws Exception 
 	{
 		this.connection = DBUtils.getConnection();
-		this.stmtInsert = this.connection.prepareCall("{call sp_insert_book(?,?,?,?,?.?)}");
-		this.stmtUpdate = this.connection.prepareCall("{call sp_update_book(?,?)}");
-		this.stmtDelete = this.connection.prepareCall("{call sp_delete_book(?)}");
-		this.stmtSelect = this.connection.prepareCall("{call sp_select_book()}");
+		this.stmtInsert = this.connection.prepareCall("{call sp_insert_books(?,?,?,?,?,?)}");
+		this.stmtUpdate = this.connection.prepareCall("{call sp_update_books(?,?)}");
+		this.stmtDelete = this.connection.prepareCall("{call sp_delete_books(?)}");
+		this.stmtSelect = this.connection.prepareCall("{call sp_select_books()}");
+		this.stmtSelectByname = this.connection.prepareCall("{call sp_select_booksByName(?)}");
 	}
 	
 	public int insertBook(Book book) throws Exception
@@ -74,6 +76,29 @@ public class BookDao implements Closeable
 		}
 		return bookList;
 	}
+	public List<Book> getBooksByName( String name)throws Exception
+	{
+		List<Book> bookList = new ArrayList<Book>();
+		stmtSelectByname.setString(1, name);
+		if( this.stmtSelectByname.execute() )
+		{
+			try( ResultSet rs = this.stmtSelectByname.getResultSet())
+			{
+				while( rs.next())
+				{
+					Book book = new Book();
+					book.setBook_Id( rs.getInt("id"));
+					book.setSubject( rs.getString("subject"));
+					book.setName( rs.getString("name") );
+					book.setAuthor( rs.getString("author") );
+					book.setPrice( rs.getFloat("price"));
+					book.setIsbn(rs.getInt("isbn"));
+					bookList.add(book);
+				}
+			}
+		}
+		return bookList;
+	}
 	@Override
 	public void close() throws IOException 
 	{
@@ -85,6 +110,11 @@ public class BookDao implements Closeable
 		{
 			throw new IOException(cause);
 		}
+	}
+
+	public void getIssuedBooks() {
+		// TODO Auto-generated method stub
+		
 	}
 }
 	

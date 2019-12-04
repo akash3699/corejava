@@ -7,7 +7,7 @@ IN prack INT,
 IN pstatus VARCHAR(50)
 )
 BEGIN
-INSERT INTO copies
-VALUES (pid, pbookid, prack,pstatus);
+INSERT INTO library.copies (rack,status,id,book_id)
+VALUES (prack,pstatus,pid, pbookid);
 END $$
 DELIMITER ;
