@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE PROCEDURE sp_select_books( )
+BEGIN
+SELECT * FROM books;
+END $$
+DELIMITER ;

@@ -1,0 +1,10 @@
+DELIMITER $$
+CREATE PROCEDURE sp_delete_copies
+(
+IN pid INT
+)
+BEGIN
+DELETE FROM copies
+WHERE id=pid;
+END $$
+DELIMITER ;

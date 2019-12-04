@@ -1,0 +1,6 @@
+DELIMITER $$
+CREATE PROCEDURE sp_select_copies( )
+BEGIN
+SELECT * FROM copies;
+END $$
+DELIMITER ;

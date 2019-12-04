@@ -1,0 +1,10 @@
+DELIMITER $$
+CREATE PROCEDURE sp_delete_users
+(
+IN pid INT
+)
+BEGIN
+DELETE FROM users
+WHERE id=pid;
+END $$
+DELIMITER ;

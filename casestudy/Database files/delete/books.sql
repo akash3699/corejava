@@ -1,0 +1,10 @@
+DELIMITER $$
+CREATE PROCEDURE sp_delete_books
+(
+IN pid INT
+)
+BEGIN
+DELETE FROM books
+WHERE id=pid;
+END $$
+DELIMITER ;
