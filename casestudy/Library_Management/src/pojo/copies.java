@@ -42,7 +42,7 @@ private String status;
 	}
 	public String toString() 
 	{
-		return String.format("%-5d%-5d%-10.2s%-50s", this.copiesid, this.bookid, this.rack,this.status);
+		return String.format("id : %-5d bookid : %-5d Rack : %-5d Stautus : %-50s", this.copiesid, this.bookid, this.rack,this.status);
 	}
 	
     

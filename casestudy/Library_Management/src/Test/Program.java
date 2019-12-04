@@ -8,6 +8,8 @@ import dao.UserDao;
 import dao.copiesdao;
 import pojo.Book;
 import pojo.copies;
+import pojo.user_p;
+
 
 public class Program {
 	static Scanner sc = new Scanner(System.in);
@@ -113,7 +115,10 @@ public class Program {
 									Program.findBookByName();
 									break;
 								case 4:
-									Program.listIssuedBooks(userid);
+									Program.availableBooks();
+									break;
+								case 5:
+//									Program.listIssuedBooks(userid);
 
 								default:
 									break;
@@ -133,9 +138,10 @@ public class Program {
 									Program.changePwd(userid);
 									break;
 								case 3:
-									
+									Program.findBookByName();
 									break;
 								case 4:
+									Program.availableBooks();
 									break;
 								case 5:
 									Program.addBook();
@@ -154,6 +160,7 @@ public class Program {
 								case 11:
 									break;
 								case 12:
+									Program.addNewMember();
 									break;
 								case 13:
 									break;
@@ -195,6 +202,29 @@ public class Program {
 
 	}
 	
+	private static void addNewMember() throws Exception 
+	{
+		user_p u1 = new user_p();
+		System.out.println("Enter id");
+		u1.setUser_Id(sc.nextInt());
+		System.out.println("Enter name");
+		u1.setUser_Name(sc.next());
+		System.out.println("Enter email");
+		u1.setEmail(sc.next());
+		System.out.println("Enter password");
+		u1.setPassword(sc.next());
+//		System.out.println("Enter r");
+		u1.setRole("user");
+		System.out.println("Enter phone");
+		u1.setPhone(sc.nextInt());
+		UserDao ud1 = new UserDao();
+		ud1.insertUser(u1);
+	}
+	private static void availableBooks() throws Exception {
+		copiesdao cd1 = new copiesdao();
+		cd1.getAvailableBooks().forEach(System.out::println);;
+		
+	}
 	private static void listIssuedBooks(int userid2) throws Exception {
 		BookDao b1 = new BookDao();
 		b1.getIssuedBooks();

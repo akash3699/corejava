@@ -19,6 +19,7 @@ public class copiesdao implements Closeable
 		private CallableStatement stmtUpdateStatus;
 		private CallableStatement stmtDelete;
 		private CallableStatement stmtSelect;
+		private CallableStatement stmtSelectByStatus;
 		public copiesdao() throws Exception 
 		{
 			this.connection = DBUtils.getConnection();
@@ -26,6 +27,7 @@ public class copiesdao implements Closeable
 			this.stmtUpdate = this.connection.prepareCall("{call sp_update_copies(?,?)}");
 			this.stmtDelete = this.connection.prepareCall("{call sp_delete_copies(?)}");
 			this.stmtSelect = this.connection.prepareCall("{call sp_select_copies()}");
+			this.stmtSelectByStatus = this.connection.prepareCall("{call sp_select_copies_status(?)}");
 		}
 		public int insertcopies(copies copies) throws Exception
 		{
@@ -64,6 +66,30 @@ public class copiesdao implements Closeable
 						copies copies = new copies();
 						copies.setCopiesid(rs.getInt("copiesid"));
 						copies.setBookid(rs.getInt("bookid"));
+						copies.setRack(rs.getInt("rack"));
+						copies.setStatus( rs.getString("status") );
+						
+						copiesList.add(copies);
+	
+				}
+			}
+			
+		}
+			return copiesList;
+		}
+		public List<copies> getAvailableBooks( )throws Exception
+		{
+			List<copies> copiesList = new ArrayList<copies>();
+			this.stmtSelectByStatus.setString(1, "available");
+			if( this.stmtSelectByStatus.execute() )
+			{
+				try( ResultSet rs = this.stmtSelectByStatus.getResultSet())
+				{
+					while( rs.next())
+					{
+						copies copies = new copies();
+						copies.setCopiesid(rs.getInt("id"));
+						copies.setBookid(rs.getInt("book_id"));
 						copies.setRack(rs.getInt("rack"));
 						copies.setStatus( rs.getString("status") );
 						
