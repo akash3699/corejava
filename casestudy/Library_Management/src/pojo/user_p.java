@@ -5,14 +5,14 @@ public class user_p
 private int User_Id;
 private String User_Name;
 private String Email;
-private int Phone;
+private long Phone;
 private String password;
 private String Role;
 
 public user_p()
 { }
 
-public user_p(int user_Id, String user_Name, String email, int phone, String password, String role) 
+public user_p(int user_Id, String user_Name, String email, long phone, String password, String role) 
 {
 	super();
 	User_Id = user_Id;

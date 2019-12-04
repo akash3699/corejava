@@ -5,7 +5,7 @@ import Utils.*;
 
 public class Program {
 	static Scanner sc = new Scanner(System.in);
-	int usertype;
+	static int userid;
 	public static int mainMenuList()
 	{
 		System.out.println("0. Exit");
@@ -62,12 +62,14 @@ public class Program {
 		
 		int choice;
 		String Roll;
+		
 		while((choice=Program.mainMenuList()) != 0)
 		{
 			switch (choice) {
 			case 1:
 				if((Roll =Program.login() )!= null)
 				{
+					
 					switch (Roll) {
 					case "owner":
 						int owner;
@@ -75,6 +77,7 @@ public class Program {
 						{
 							switch (owner) {
 							case 1:
+								Program.editProfile(userid);
 								
 								break;
 
@@ -91,7 +94,7 @@ public class Program {
 						{
 							switch (user) {
 							case 1:
-								
+								Program.editProfile(userid);
 								break;
 
 							default:
@@ -106,7 +109,7 @@ public class Program {
 						{
 							switch (librarian) {
 							case 1:
-								
+								Program.editProfile(userid);
 								break;
 
 							default:
@@ -137,15 +140,21 @@ public class Program {
 		
 
 	}
+	private static void editProfile(int userid) {
+		// TODO Auto-generated method stub
+		
+	}
 	private static String login() {
 		String email,password;
-		System.out.print("Enter email id");
+		System.out.print("Enter email id  : ");
 		email = sc.next();
-		System.out.print("Enter password");
+		System.out.print("Enter password  : ");
 		password = sc.next();
 		if(login.validate(email,password))
 		{
-			return login.getRole(email);
+			userid=login.getUserid(email);
+			String role = login.getRole(email);
+			return role;
 		}
 		else
 		{

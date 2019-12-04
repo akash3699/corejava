@@ -23,10 +23,10 @@ public class UserDao implements Closeable
 	public UserDao() throws Exception 
 	{
 		this.connection = DBUtils.getConnection();
-		this.stmtInsert = this.connection.prepareCall("{call sp_insert_books(?,?,?,?,?.?)}");
-		this.stmtUpdate = this.connection.prepareCall("{call sp_update_books(?,?)}");
-		this.stmtDelete = this.connection.prepareCall("{call sp_delete_books(?)}");
-		this.stmtSelect = this.connection.prepareCall("{call sp_select_books()}");
+		this.stmtInsert = this.connection.prepareCall("{call sp_insert_users(?,?,?,?,?,?)}");
+		this.stmtUpdate = this.connection.prepareCall("{call sp_update_users(?,?)}");
+		this.stmtDelete = this.connection.prepareCall("{call sp_delete_users(?)}");
+		this.stmtSelect = this.connection.prepareCall("{call sp_select_users()}");
 	}
 	
 	public int insertUser(user_p up) throws Exception
