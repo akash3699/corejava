@@ -1,14 +1,16 @@
 package Test;
 
 import java.util.Scanner;
+import Utils.*;
 
 public class Program {
 	static Scanner sc = new Scanner(System.in);
+	int usertype;
 	public static int mainMenuList()
 	{
 		System.out.println("0. Exit");
 		System.out.println("1. Sign in");
-		System.out.println("3. Sign up");
+		System.out.println("2. Sign up");
 		System.out.print("Enter Choice  : ");
 		return sc.nextInt();
 	}
@@ -59,10 +61,71 @@ public class Program {
 	public static void main(String[] args) {
 		
 		int choice;
+		String Roll;
 		while((choice=Program.mainMenuList()) != 0)
 		{
 			switch (choice) {
 			case 1:
+				if((Roll =Program.login() )!= null)
+				{
+					switch (Roll) {
+					case "owner":
+						int owner;
+						while((owner=Program.subOwnerMenuList()) != 0)
+						{
+							switch (owner) {
+							case 1:
+								
+								break;
+
+							default:
+								break;
+							}
+							
+						}
+						
+						break;
+					case "user":
+						int user;
+						while((user=Program.subMemberMenuList()) != 0)
+						{
+							switch (user) {
+							case 1:
+								
+								break;
+
+							default:
+								break;
+							}
+						}
+						
+						break;
+					case "librarian":
+						int librarian;
+						while((librarian=Program.subLibrarianMenuList()) != 0)
+						{
+							switch (librarian) {
+							case 1:
+								
+								break;
+
+							default:
+								break;
+							}
+							
+						}
+						break;
+
+					default:
+						break;
+					}
+					
+				}
+				else
+				{
+					System.out.println("Email/password is incorrect");
+				}
+				
 				break;
 			case 2:
 				break;
@@ -73,6 +136,22 @@ public class Program {
 		}
 		
 
+	}
+	private static String login() {
+		String email,password;
+		System.out.print("Enter email id");
+		email = sc.next();
+		System.out.print("Enter password");
+		password = sc.next();
+		if(login.validate(email,password))
+		{
+			return login.getRole(email);
+		}
+		else
+		{
+			return null;
+		}
+		
 	}
 
 }

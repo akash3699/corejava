@@ -23,13 +23,13 @@ public class UserDao implements Closeable
 	public UserDao() throws Exception 
 	{
 		this.connection = DBUtils.getConnection();
-		this.stmtInsert = this.connection.prepareCall("{call sp_insert_book(?,?,?,?,?.?)}");
-		this.stmtUpdate = this.connection.prepareCall("{call sp_update_book(?,?)}");
-		this.stmtDelete = this.connection.prepareCall("{call sp_delete_book(?)}");
-		this.stmtSelect = this.connection.prepareCall("{call sp_select_book()}");
+		this.stmtInsert = this.connection.prepareCall("{call sp_insert_books(?,?,?,?,?.?)}");
+		this.stmtUpdate = this.connection.prepareCall("{call sp_update_books(?,?)}");
+		this.stmtDelete = this.connection.prepareCall("{call sp_delete_books(?)}");
+		this.stmtSelect = this.connection.prepareCall("{call sp_select_books()}");
 	}
 	
-	public int insertBook(user_p up) throws Exception
+	public int insertUser(user_p up) throws Exception
 	{
 		this.stmtInsert.setInt(1, up.getUser_Id());
 		this.stmtInsert.setString(2, up.getUser_Name());
@@ -41,22 +41,22 @@ public class UserDao implements Closeable
 		this.stmtInsert.execute();
 		return this.stmtInsert.getUpdateCount();
 	}
-	public int updateBook( int userid, String user_Name )throws Exception
+	public int updateUser( int userid, String user_Name )throws Exception
 	{
 		this.stmtUpdate.setInt(1, userid );
 		this.stmtUpdate.setString(2, user_Name);
 		this.stmtUpdate.execute();
 		return this.stmtUpdate.getUpdateCount();
 	}
-	public int deleteBook( int userId )throws Exception
+	public int deleteUser( int userId )throws Exception
 	{
 		this.stmtDelete.setInt(1, userId );
 		this.stmtDelete.execute();
 		return this.stmtDelete.getUpdateCount();
 	}
-	public List<user_p> getBooks( )throws Exception
+	public List<user_p> getUsers( )throws Exception
 	{
-		List<user_p> userList = new ArrayList<user_p>();
+		List<user_p>  userList = new ArrayList<>();
 		if( this.stmtSelect.execute() )
 		{
 			try( ResultSet rs = this.stmtSelect.getResultSet())
@@ -64,12 +64,12 @@ public class UserDao implements Closeable
 				while( rs.next())
 				{
 					user_p up = new user_p();
-					up.setUser_Id( rs.getInt("book_id"));
-					up.setUser_Name( rs.getString("user_name"));
-					up.setEmail( rs.getString("Email") );
-					up.setPhone( rs.getLong("Phone") );
-					up.setPassword( rs.getString("Password") );
-					up.setRole( rs.getString("Role"));
+					up.setUser_Id( rs.getInt("id"));
+					up.setUser_Name( rs.getString("name"));
+					up.setEmail( rs.getString("email") );
+					up.setPhone( rs.getInt("phone") );
+					up.setPassword( rs.getString("passwd") );
+					up.setRole( rs.getString("role"));
 					userList.add(up);
 				}
 			}
