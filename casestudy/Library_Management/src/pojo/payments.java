@@ -1,19 +1,24 @@
 package pojo;
 
-import Utils.datetime;
+import java.sql.Date;
+import java.sql.Time;
+
 
 public class payments {
 	private int id;
 	private int userid;
 	private float amount;
 	private String type;
-	private datetime datetime;
-	public payments(int id, int userid, float amount, String type, Utils.datetime datetime) {
+	private Time tx_time;
+	private Date datetime;
+	public payments() {}
+	public payments(int id, int userid, float amount, String type, Time tx_time, Date datetime) {
 		super();
 		this.id = id;
 		this.userid = userid;
 		this.amount = amount;
 		this.type = type;
+		this.setTx_time(tx_time);
 		this.datetime = datetime;
 	}
 	public int getId() {
@@ -40,16 +45,22 @@ public class payments {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public datetime getDatetime() {
+	public Date getDatetime() {
 		return datetime;
 	}
-	public void setDatetime(datetime datetime) {
+	public void setDatetime(Date datetime) {
 		this.datetime = datetime;
 	}
 	@Override
 	public String toString() {
 		return "payments [id=" + id + ", userid=" + userid + ", amount=" + amount + ", type=" + type + ", datetime="
 				+ datetime + "]";
+	}
+	public Time getTx_time() {
+		return tx_time;
+	}
+	public void setTx_time(Time tx_time) {
+		this.tx_time = tx_time;
 	}
 	
 
