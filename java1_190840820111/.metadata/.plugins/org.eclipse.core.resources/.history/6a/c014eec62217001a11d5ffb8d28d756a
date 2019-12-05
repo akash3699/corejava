@@ -1,0 +1,4 @@
+DRIVER=com.mysql.cj.jdbc.Driver
+URL=jdbc:mysql://localhost/java1
+USER=kdac
+PASSWORD=kdac

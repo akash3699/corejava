@@ -1,0 +1,73 @@
+package test;
+
+import java.sql.Date;
+import java.util.Scanner;
+
+import Dao.ProductDao;
+import pojo.Product;
+
+public class Program {
+	static Scanner sc =new Scanner(System.in);
+	public static int menuList()
+	{
+		System.out.println("0)Exit ");
+		System.out.println("1)Display All Product ");
+		System.out.println("2)Insert Product ");
+		System.out.println("3)Update Product Price");
+		return sc.nextInt();
+	}
+	
+	public static void main(String[] args) {
+		int choice;
+		while((choice = Program.menuList()) !=0 )
+		{
+			try {
+				switch (choice) {
+				case 1:
+					Program.DisplayProducts();
+					break;
+				case 2:
+					Program.insertProduct();
+					break;
+				case 3:
+					Program.updateProduct();
+					break;
+					
+
+				default:
+					break;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private static void updateProduct() {
+		
+		
+	}
+
+	private static void insertProduct() {
+		Product p = new Product();
+		p.setName(sc.next());
+		p.setCompanyname(sc.next());
+		p.setPrice(sc.nextFloat());
+		Date d1 = 
+		p.setExpirydate(new Date(year, month, day));
+		
+	}
+
+	private static void DisplayProducts() throws Exception {
+		ProductDao p1 =new ProductDao();
+		System.out.printf("%-15s%-15s%-15s%-10s%s","ProductID","ProductName", "CompanyName","Price","ExpiryDate");
+		System.out.println();
+		System.out.println("========================================================================================");
+		p1.getProducts().forEach(System.out::println);
+		
+	}
+
+}
+
+

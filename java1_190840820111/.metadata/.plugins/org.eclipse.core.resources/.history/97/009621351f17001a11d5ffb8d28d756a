@@ -1,0 +1,13 @@
+package pojo;
+
+import java.sql.Date;
+
+public class Product {
+	private int productid;
+	private String name;
+	private String companyname;
+	private float price;
+	private Date expirydate;
+	
+
+}

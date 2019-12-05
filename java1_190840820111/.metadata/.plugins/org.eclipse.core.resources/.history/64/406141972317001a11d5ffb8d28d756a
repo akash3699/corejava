@@ -1,0 +1,17 @@
+package test;
+
+import Dao.ProductDao;
+
+public class Program {
+	
+	public static void main(String[] args) {
+		try {
+			ProductDao p1 =new ProductDao();
+			p1.getProducts().forEach(System.out::println);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

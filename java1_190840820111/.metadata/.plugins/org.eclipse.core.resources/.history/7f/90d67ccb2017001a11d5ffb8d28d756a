@@ -1,0 +1,35 @@
+package Dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
+
+import Utils.DBUtils;
+import pojo.Product;
+
+public class ProductDao {
+	public PreparedStatement stmtInsert;
+	public PreparedStatement stmtDelete;
+	public PreparedStatement stmtUpdate;
+	public PreparedStatement stmtSelect;
+	
+	public ProductDao() throws Exception {
+		try( Connection connection = DBUtils.getConnection();)
+		{
+			this.stmtSelect = connection.prepareStatement("Select * from product");
+			
+		}
+		
+	}
+	
+	public List<Product> getProducts() throws Exception
+	{
+		List<Product> l1 = new ArrayList<>()
+		if(this.stmtSelect.execute())
+			
+		return null;
+	}
+	
+
+}

@@ -1,0 +1,14 @@
+package Utils;
+
+public class DBUtils {
+
+	static {
+		try {
+			
+		}
+		catch(Exception ex)
+		{
+			
+		}
+	}
+}

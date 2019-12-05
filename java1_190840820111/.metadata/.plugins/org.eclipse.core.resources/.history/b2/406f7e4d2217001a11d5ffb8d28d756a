@@ -1,0 +1,12 @@
+package test;
+
+import Dao.ProductDao;
+
+public class Program {
+	
+	public static void main(String[] args) {
+		ProductDao p1 =new ProductDao();
+		p1.getProducts().forEach(arg0);
+	}
+
+}

@@ -1,0 +1,22 @@
+package Utils;
+
+import java.io.FileInputStream;
+import java.util.Properties;
+
+public class DBUtils {
+
+	static Properties p;
+	static {
+		try {
+			p=new Properties();
+			p.load(new FileInputStream("Config.propertis"));
+			Class.forName(p.getProperty("DRIVER"));
+			
+			
+		}
+		catch(Exception ex)
+		{
+			
+		}
+	}
+}
